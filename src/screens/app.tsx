@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, type ImageSourcePropType } from "react-native";
 import { registerRootComponent } from "expo";
 import * as ImagePicker from "expo-image-picker";
 import { StatusBar } from "expo-status-bar";
@@ -7,6 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import PlaceholderImage from "@/assets/images/background-image.png";
 import { Button } from "@/components/button";
 import { CircleButton } from "@/components/circle-button";
+import { EmojiList } from "@/components/emoji-list";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { IconButton } from "@/components/icon-button";
 import { ImageViewer } from "@/components/image-viewer";
@@ -15,6 +16,9 @@ const App = () => {
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [pickedEmoji, setPickedEmoji] = useState<ImageSourcePropType | null>(
+    null,
+  );
 
   const onModalClose = () => {
     setIsModalVisible(false);
@@ -59,7 +63,9 @@ const App = () => {
           selectedImage={selectedImage}
         />
       </View>
-      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose} />
+      <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+        <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+      </EmojiPicker>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
