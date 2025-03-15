@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Image, View, type ImageSourcePropType } from "react-native";
+import { Animated, View, type ImageSourcePropType } from "react-native";
 
 type EmojiStickerProps = {
   stickerSource: ImageSourcePropType | undefined;
@@ -9,7 +9,7 @@ type EmojiStickerProps = {
 export const EmojiSticker: FC<EmojiStickerProps> = (props) => {
   return (
     <View style={{ top: -350 }}>
-      <Image
+      <Animated.Image
         source={props.stickerSource}
         resizeMode="contain"
         style={{ width: props.imageSize, height: props.imageSize }}
