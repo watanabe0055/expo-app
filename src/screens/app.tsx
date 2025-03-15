@@ -12,7 +12,7 @@ const App = () => {
         <ImageViewer placeholderImageSource={PlaceholderImage} />
       </View>
       <View style={styles.footerContainer}>
-        <Button label="写真を選択" />
+        <Button theme="primary" label="写真を選択" />
         <Button label="この写真を使用" />
       </View>
     </View>
