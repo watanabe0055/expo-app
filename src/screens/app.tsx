@@ -2,6 +2,7 @@ import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { registerRootComponent } from "expo";
 import * as ImagePicker from "expo-image-picker";
+import { StatusBar } from "expo-status-bar";
 
 import PlaceholderImage from "@/assets/images/background-image.png";
 import { Button } from "@/components/button";
@@ -9,6 +10,12 @@ import { ImageViewer } from "@/components/image-viewer";
 
 const App = () => {
   const [selectedImage, setSelectedImage] = useState<null | string>(null);
+  const [showAppOptions, setShowAppOptions] = useState(false);
+
+  <ImageViewer
+    placeholderImageSource={PlaceholderImage}
+    selectedImage={selectedImage}
+  />;
 
   const pickImageAsync = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -18,6 +25,7 @@ const App = () => {
 
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+      setShowAppOptions(true);
     } else {
       alert("画像が選択されていません");
     }
@@ -31,10 +39,18 @@ const App = () => {
           selectedImage={selectedImage}
         />
       </View>
-      <View style={styles.footerContainer}>
-        <Button theme="primary" label="写真を選択" onPress={pickImageAsync} />
-        <Button label="この写真を使用" />
-      </View>
+      {showAppOptions ? (
+        <View />
+      ) : (
+        <View style={styles.footerContainer}>
+          <Button theme="primary" label="写真を選択" onPress={pickImageAsync} />
+          <Button
+            label="この写真を使用"
+            onPress={() => setShowAppOptions(true)}
+          />
+        </View>
+      )}
+      <StatusBar style="auto" />
     </View>
   );
 };
