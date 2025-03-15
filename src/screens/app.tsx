@@ -1,19 +1,14 @@
-import {
-  Image,
-  StyleSheet,
-  View,
-  type ImageSourcePropType,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import { registerRootComponent } from "expo";
-import { StatusBar } from "expo-status-bar";
 
 import PlaceholderImage from "@/assets/images/background-image.png";
+import { ImageViewer } from "@/components/image-viewer";
 
 const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={PlaceholderImage} style={styles.image} />
+        <ImageViewer placeholderImageSource={PlaceholderImage} />
       </View>
     </View>
   );
@@ -28,11 +23,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     paddingTop: 58,
-  },
-  image: {
-    width: 320,
-    height: 440,
-    borderRadius: 18,
   },
 });
 
